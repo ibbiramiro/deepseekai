@@ -1,0 +1,13 @@
+body {
+    background-color: #f8f9fa;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    /* Tambahkan transisi agar perpindahan terlihat halus */
+    transition: all 0.5s ease-in-out; 
+}
