@@ -65,6 +65,21 @@ export default function LoginForm() {
     router.push("/welcome");
   };
 
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/welcome`,
+      },
+    });
+
+    if (error) {
+      setWarning(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-white flex justify-center items-center min-h-screen text-black">
       <div className="w-full max-w-md">
@@ -237,7 +252,9 @@ export default function LoginForm() {
 
             <button
               type="button"
-              className="w-full h-12 border border-gray-300 rounded-lg font-medium flex items-center justify-center hover:bg-gray-50 transition focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 text-black"
+              onClick={handleGoogleLogin}
+              disabled={loading}
+              className="w-full h-12 border border-gray-300 rounded-lg font-medium flex items-center justify-center hover:bg-gray-50 transition focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 text-black disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
