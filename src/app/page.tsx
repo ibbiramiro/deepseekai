@@ -70,7 +70,8 @@ export default function LoginForm() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/welcome`,
+        // Mengarahkan ke halaman yang sudah dihosting di Vercel
+        redirectTo: "https://deepseekai-three-kappa.vercel.app/welcome",
       },
     });
 
